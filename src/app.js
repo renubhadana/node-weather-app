@@ -1,6 +1,6 @@
-const path = require('path')
+const path = require('path')  // used to set paths for directory and  files
 const express = require('express')
-const hbs = require('hbs')
+const hbs = require('hbs') // view engine used to render dynamic content 
 const geocode = require('./utils/geocode.js')
 const forecast = require('./utils/forecast.js')
 
@@ -11,11 +11,12 @@ const publicDirectoryPath = path.join(__dirname,"../public")
 const viewsLocation = path.join(__dirname, '../templates/views')
 const partialsPath = path.join(__dirname, '../templates/partials')
 
-// Setup handlebarsn
+// Setup handlebars engine
 app.set('view engine', 'hbs')
 
 // Setup views location
 app.set('views', viewsLocation)
+hbs.registerPartials(partialsPath)
 
 // Setup static directory to server
 app.use(express.static(publicDirectoryPath))
@@ -24,7 +25,7 @@ app.use(express.static(publicDirectoryPath))
 // app.use(express.static(publicDirectoryPath+"/help.html"))
 
 app.get('', (req, res) => {
-    res.render('index', {
+    res.render('index', {   // render used to render views
         title: "Home Page",
         name: "Renu"
     })
@@ -68,7 +69,6 @@ app.get('/weather', (req, res) => {
         })
     
     })
-
     
 })
 
